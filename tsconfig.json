@@ -18,9 +18,21 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@locales/*": ["../locales/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@contexts/*": ["./src/contexts/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@atoms/*": ["./src/lib/atoms/*"],
+      "@molecules/*": ["./src/lib/molecules/*"],
+      "@organisms/*": ["./src/lib/organisms/*"],
+      "@pages/*": ["./src/lib/pages/*"],
+      "@templates/*": ["./src/lib/templates/*"],
+      "@storage/*": ["./src/storage/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src"],
   "exclude": ["node_modules"]
 }

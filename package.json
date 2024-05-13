@@ -5,6 +5,7 @@
   "scripts": {
     "build": "next build",
     "build-storybook": "storybook build",
+    "ci:check": "npm run format && npm run lint:tsc && npm run test:coverage && npm run build",
     "dev": "next dev",
     "format": "prettier --write .",
     "knip": "knip",
@@ -12,7 +13,6 @@
     "lint:ci": "next lint --format=checkstyle -o checkstyle-result.xml",
     "lint:fix": "next lint --fix",
     "lint:tsc": "npm run type:check && npm run lint",
-    "pre-deploy": "npm run format && npm run lint:tsc && npm run test:coverage && npm run build",
     "start": "next start",
     "storybook": "storybook dev -p 6006",
     "test": "jest",

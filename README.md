@@ -41,7 +41,6 @@ Here is a guide to the prefixes used in commit messages along with a simple exam
 
 Include the ticket number for traceability and mention any breaking changes.
 
-
 ### Prefixes
 
 - `feat`: A new feature

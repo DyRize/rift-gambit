@@ -34,3 +34,34 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Commit message templates
+
+Here is a guide to the prefixes used in commit messages along with a simple example.
+
+Include the ticket number for traceability and mention any breaking changes.
+
+### Prefixes
+
+- `feat`: A new feature
+- `fix`: A bug fix
+- `refactor`: A code change that neither fixes a bug nor adds a feature
+- `docs`: Documentation only changes
+- `test`: Adding missing tests or correcting existing tests
+- `chore`: Changes to the build process or auxiliary tools and libraries such as documentation generation
+- `style`: Changes that do not affect the meaning of the code
+- `ci`: Changes to the CI configuration files and scripts
+- `perf`: A code change that improves performance
+- `security`: A code change that addresses a security issue
+
+### Example
+
+```git
+feat(home): remove deprecated feature
+
+Remove a deprecated feature from the home page.
+
+BREAKING CHANGE: The deprecated feature has been removed.
+
+Ticket #1234
+```

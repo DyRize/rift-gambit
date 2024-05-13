@@ -17,8 +17,8 @@ describe('DarkModeToggle', () => {
           <DarkModeToggle />
         </GlobalContextMock>,
       );
-      const button = screen.getByRole('button');
-      fireEvent.click(button);
+      const toggle = screen.getByRole('switch', { name: 'Dark Mode' });
+      fireEvent.click(toggle);
       expect(localStorage.getItem('darkMode')).toBe(
         initialDarkMode === 'true' ? 'false' : 'true',
       );

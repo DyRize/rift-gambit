@@ -3,6 +3,7 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import { Button } from '@/src/components/ui/button';
 
 // Todo : Enhance this component with design and story in the future
 const LanguageSwitcher = () => {
@@ -16,8 +17,8 @@ const LanguageSwitcher = () => {
   return (
     <div>
       <p>{t('Changement de la langue par défaut')}</p>
-      <button onClick={() => handleChangeLanguage('en')}>English</button>
-      <button onClick={() => handleChangeLanguage('fr')}>Français</button>
+      <Button onClick={() => handleChangeLanguage('en')}>English</Button>
+      <Button onClick={() => handleChangeLanguage('fr')}>Français</Button>
     </div>
   );
 };

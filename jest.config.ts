@@ -36,6 +36,7 @@ const config: Config = {
     '!src/i18n.ts',
     '!src/contexts/**/*',
     '!src/storage/**/*',
+    '!src/components/**/*',
   ],
 
   // The directory where Jest should output its coverage files

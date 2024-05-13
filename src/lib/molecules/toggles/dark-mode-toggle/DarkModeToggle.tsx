@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
 import darkModeAtom from '@storage/dark-mode.atom';
+import { Switch } from '@components/ui/switch';
 
 // Todo : Enhance this component with design and story in the future
 const DarkModeToggle = () => {
@@ -22,9 +23,12 @@ const DarkModeToggle = () => {
   };
 
   return (
-    <button onClick={toggleDarkMode}>
-      Basculer en mode {darkMode ? 'clair' : 'sombre'}
-    </button>
+    <div className="flex gap-2">
+      <label htmlFor="toggle" className="flex cursor-pointer items-center">
+        Dark Mode
+      </label>
+      <Switch id={'toggle'} checked={darkMode} onClick={toggleDarkMode} />
+    </div>
   );
 };
 

@@ -13,10 +13,10 @@ on:
     branches:
       - main
       - dev
-      - fix**
-      - feature**
-      - hotfix**
-      - release**
+      - fix/**
+      - feature/**
+      - hotfix/**
+      - release/**
   workflow_dispatch:
 
 jobs:

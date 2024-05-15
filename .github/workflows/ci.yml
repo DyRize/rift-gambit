@@ -5,9 +5,6 @@ on:
     branches:
       - main
       - dev
-      - fix/**
-      - feature/**
-      - hotfix/**
       - release/**
   pull_request:
     branches:
@@ -17,6 +14,7 @@ on:
       - feature/**
       - hotfix/**
       - release/**
+      - refactor/**
   workflow_dispatch:
 
 jobs:

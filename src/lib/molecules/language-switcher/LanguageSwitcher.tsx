@@ -1,14 +1,16 @@
 'use client';
 
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 // Todo : Enhance this component with design and story in the future
 const LanguageSwitcher = () => {
-  const { t, i18n } = useTranslation('example');
+  const t = useTranslations('example');
+  const router = useRouter();
 
   const handleChangeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng).then(() => localStorage.setItem('locale', lng));
+    router.push(`/${lng}`);
   };
 
   return (

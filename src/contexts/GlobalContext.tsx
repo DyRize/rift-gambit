@@ -1,24 +1,24 @@
-'use client';
+import React, { PropsWithChildren } from 'react';
+import { Provider } from 'jotai';
+import { AbstractIntlMessages, NextIntlClientProvider } from 'next-intl';
 
-import React, { useEffect } from 'react';
-import { Provider, useSetAtom } from 'jotai';
-import { i18nInit } from '../i18n';
-import darkModeAtom from '@storage/dark-mode.atom';
+export const DEFAULT_LOCALE = 'fr';
 
-const DEFAULT_LOCALE = 'fr';
+type GlobalContextProps = {
+  messages: AbstractIntlMessages;
+  locale?: string;
+} & PropsWithChildren;
 
-i18nInit(DEFAULT_LOCALE);
-
-const GlobalContext = ({ children }: React.PropsWithChildren) => {
-  useEffect(() => {
-    const locale = localStorage.getItem('locale');
-
-    if (locale && locale !== DEFAULT_LOCALE) {
-      i18nInit(locale);
-    }
-  }, []);
-
-  return <Provider>{children}</Provider>;
+const GlobalContext = ({
+  messages,
+  locale = DEFAULT_LOCALE,
+  children,
+}: GlobalContextProps) => {
+  return (
+    <NextIntlClientProvider messages={messages} locale={locale}>
+      <Provider>{children}</Provider>
+    </NextIntlClientProvider>
+  );
 };
 
 export default GlobalContext;

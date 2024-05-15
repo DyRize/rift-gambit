@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import DarkModeToggle from './DarkModeToggle';
-import GlobalContext from '@contexts/GlobalContext';
+import GlobalContextMock from '@contexts/mocks/GlobalContext.mock';
 
 beforeEach(() => {
   localStorage.clear();
@@ -13,9 +13,9 @@ describe('DarkModeToggle', () => {
     (initialDarkMode) => {
       localStorage.setItem('darkMode', initialDarkMode);
       render(
-        <GlobalContext>
+        <GlobalContextMock>
           <DarkModeToggle />
-        </GlobalContext>,
+        </GlobalContextMock>,
       );
       const button = screen.getByRole('button');
       fireEvent.click(button);

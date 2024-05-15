@@ -1,34 +1,26 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import LanguageSwitcher from './LanguageSwitcher';
-import GlobalContext from '@contexts/GlobalContext';
+import { useRouter } from 'next/navigation';
+import GlobalContextMock from '@contexts/mocks/GlobalContext.mock';
 
-const mockChangeLanguage = jest.fn(() => Promise.resolve());
-
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: (key: string) => key,
-    i18n: {
-      changeLanguage: mockChangeLanguage,
-      language: 'fr',
-    },
-  }),
-  initReactI18next: {
-    type: '3rdParty',
-    init: jest.fn(),
-  },
+jest.mock('next/navigation', () => ({
+  useRouter: jest.fn(),
 }));
 
-beforeEach(() => {
-  jest.clearAllMocks(); // Réinitialise les appels et instances de toutes les simulations
-});
-
 describe('LanguageSwitcher', () => {
+  beforeEach(() => {
+    const push = jest.fn();
+    (useRouter as jest.Mock).mockReturnValue({
+      push,
+    });
+  });
+
   test('Renders component correctly', () => {
     render(
-      <GlobalContext>
+      <GlobalContextMock>
         <LanguageSwitcher />
-      </GlobalContext>,
+      </GlobalContextMock>,
     );
     expect(screen.getByText('Changement de la langue par défaut')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'English' })).toBeInTheDocument();
@@ -39,17 +31,19 @@ describe('LanguageSwitcher', () => {
     { language: 'en', name: 'English' },
     { language: 'fr', name: 'Français' },
   ])(
-    'Calls i18n.changeLanguage with correct argument when %s button is clicked',
+    'Calls router.push with correct argument when %s button is clicked',
     ({ language, name }) => {
+      const push = jest.fn();
+      (useRouter as jest.Mock).mockReturnValue({ push });
+
       render(
-        <GlobalContext>
+        <GlobalContextMock>
           <LanguageSwitcher />
-        </GlobalContext>,
+        </GlobalContextMock>,
       );
 
       fireEvent.click(screen.getByRole('button', { name }));
-
-      expect(mockChangeLanguage).toHaveBeenCalledWith(language);
+      expect(push).toHaveBeenCalledWith(`/${language}`);
     },
   );
 });

@@ -1,28 +1,12 @@
-import fr from '@/locales/fr';
-import en from '@/locales/en';
-import { initReactI18next } from 'react-i18next';
-import i18next from 'i18next';
+import { notFound } from 'next/navigation';
+import { getRequestConfig } from 'next-intl/server';
 
-export const defaultNS = 'common';
-export const resources = {
-  fr,
-  en,
-};
-export const i18nInit = (lng: string): void => {
-  i18next
-    .use(initReactI18next)
-    .init({
-      lng,
-      ns: Object.keys(fr),
-      defaultNS,
-      resources,
-      fallbackLng: {
-        default: ['fr'],
-      },
-      preload: Object.keys(resources),
-      interpolation: {
-        escapeValue: false,
-      },
-    })
-    .then();
-};
+const locales = ['fr', 'en'];
+
+export default getRequestConfig(async ({ locale }) => {
+  if (!locales.includes(locale as any)) notFound();
+
+  return {
+    messages: (await import(`../locales/${locale}.json`)).default,
+  };
+});

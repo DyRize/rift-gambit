@@ -21,6 +21,7 @@
       "@/*": ["./*"],
       "@locales/*": ["../locales/*"],
       "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
       "@constants/*": ["./src/constants/*"],
       "@contexts/*": ["./src/contexts/*"],
       "@hooks/*": ["./src/hooks/*"],
@@ -30,6 +31,7 @@
       "@pages/*": ["./src/lib/pages/*"],
       "@templates/*": ["./src/lib/templates/*"],
       "@storage/*": ["./src/storage/*"],
+      "@themes/*": ["./src/themes/*"],
       "@utils/*": ["./src/utils/*"]
     }
   },

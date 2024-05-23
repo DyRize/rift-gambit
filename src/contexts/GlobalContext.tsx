@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { Provider } from 'jotai';
 import { AbstractIntlMessages, NextIntlClientProvider } from 'next-intl';
+import ThemeProvider from '@themes/ThemeProvider';
 
 export const DEFAULT_LOCALE = 'fr';
 
@@ -15,9 +16,16 @@ const GlobalContext = ({
   children,
 }: GlobalContextProps) => {
   return (
-    <NextIntlClientProvider messages={messages} locale={locale}>
-      <Provider>{children}</Provider>
-    </NextIntlClientProvider>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="dark"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <NextIntlClientProvider messages={messages} locale={locale}>
+        <Provider>{children}</Provider>
+      </NextIntlClientProvider>
+    </ThemeProvider>
   );
 };
 

@@ -1,25 +1,21 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useAtom } from 'jotai';
-import darkModeAtom from '@storage/dark-mode.atom';
 import { Switch } from '@components/ui/switch';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 // Todo : Enhance this component with design and story in the future
 const DarkModeToggle = () => {
-  const [darkMode, setDarkMode] = useAtom(darkModeAtom);
+  const { theme, setTheme } = useTheme();
+  const [currentTheme, setCurrentTheme] = useState<string | null>(null);
 
   useEffect(() => {
-    const isDarkMode = localStorage.getItem('darkMode') === 'true';
-    setDarkMode(isDarkMode);
-    document.documentElement.classList.toggle('dark', isDarkMode);
-  }, [setDarkMode]);
+    theme && setCurrentTheme(theme);
+  }, [theme]);
 
   const toggleDarkMode = () => {
-    const newDarkMode = !darkMode;
-    localStorage.setItem('darkMode', newDarkMode ? 'true' : 'false');
-    document.documentElement.classList.toggle('dark', newDarkMode);
-    setDarkMode(newDarkMode);
+    setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    setCurrentTheme(currentTheme === 'dark' ? 'light' : 'dark');
   };
 
   return (
@@ -27,7 +23,7 @@ const DarkModeToggle = () => {
       <label htmlFor="toggle" className="flex cursor-pointer items-center">
         Dark Mode
       </label>
-      <Switch id={'toggle'} checked={darkMode} onClick={toggleDarkMode} />
+      <Switch id={'toggle'} checked={currentTheme === 'dark'} onClick={toggleDarkMode} />
     </div>
   );
 };

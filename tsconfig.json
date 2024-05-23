@@ -31,6 +31,7 @@
       "@pages/*": ["./src/lib/pages/*"],
       "@templates/*": ["./src/lib/templates/*"],
       "@storage/*": ["./src/storage/*"],
+      "@themes/*": ["./src/themes/*"],
       "@utils/*": ["./src/utils/*"]
     }
   },

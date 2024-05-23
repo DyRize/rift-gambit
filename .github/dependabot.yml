@@ -13,7 +13,7 @@ updates:
     schedule:
       interval: 'weekly'
       day: 'monday'
-      time: "09:00"
+      time: '09:00'
     reviewers:
       - 'DyRize'
     labels:
@@ -22,29 +22,29 @@ updates:
     groups:
       core:
         patterns:
-          - "react"
-          - "react-dom"
-          - "next"
+          - 'react'
+          - 'react-dom'
+          - 'next'
       ui:
         patterns:
-          - "@radix-ui/*"
-          - "tailwindcss"
-          - "tailwindcss-animate"
-          - "tailwind-merge"
+          - '@radix-ui/*'
+          - 'tailwindcss'
+          - 'tailwindcss-animate'
+          - 'tailwind-merge'
       tooling:
         patterns:
-          - "eslint"
-          - "prettier"
-          - "typescript"
-          - "jest"
-          - "postcss"
-          - "knip"
+          - 'eslint'
+          - 'prettier'
+          - 'typescript'
+          - 'jest'
+          - 'postcss'
+          - 'knip'
       storybook:
         patterns:
-          - "@storybook/*"
+          - '@storybook/*'
       i18n:
         patterns:
-          - "i18next"
-          - "next-intl"
+          - 'i18next'
+          - 'next-intl'
     target-branch: 'dev'
     open-pull-requests-limit: 20

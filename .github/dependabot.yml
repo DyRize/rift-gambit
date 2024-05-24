@@ -22,29 +22,51 @@ updates:
     groups:
       core:
         patterns:
+          - 'next'
+          - 'next-themes'
           - 'react'
           - 'react-dom'
-          - 'next'
       ui:
         patterns:
           - '@radix-ui/*'
+          - 'autoprefixer'
+          - 'class-variance-authority'
+          - 'clsx'
+          - 'tailwind-merge'
           - 'tailwindcss'
           - 'tailwindcss-animate'
-          - 'tailwind-merge'
-      tooling:
-        patterns:
-          - 'eslint'
-          - 'prettier'
-          - 'typescript'
-          - 'jest'
           - 'postcss'
-          - 'knip'
-      storybook:
+      state:
         patterns:
-          - '@storybook/*'
-      i18n:
+          - 'jotai'
+      localization:
         patterns:
           - 'i18next'
           - 'next-intl'
+      types:
+        patterns:
+          - '@types/*'
+          - 'typescript'
+          - '@total-typescript/ts-reset'
+      linting:
+        patterns:
+          - 'eslint'
+          - 'eslint-config-next'
+          - 'prettier'
+          - 'prettier-plugin-tailwindcss'
+      testing:
+        patterns:
+          - '@testing-library/*'
+          - 'jest'
+          - 'jest-environment-jsdom'
+      storybook:
+        patterns:
+          - '@chromatic-com/storybook'
+          - '@storybook/*'
+          - 'storybook'
+          - 'eslint-plugin-storybook'
+      tools:
+        patterns:
+          - 'knip'
     target-branch: 'dev'
     open-pull-requests-limit: 20

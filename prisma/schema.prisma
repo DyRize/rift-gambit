@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource database {
+  provider = "mongodb"
+  url = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+enum Region {
+  NORTH_AMERICA
+  EUROPE
+  KOREA
+  CHINA
+}
+
+model League {
+  id String @id @default(auto()) @map("_id") @database.ObjectId
+  name String
+  tag String
+  region Region
+  teams Team[]
+
+  @@map("leagues")
+}
+
+model Team {
+  id String @id @default(auto()) @map("_id") @database.ObjectId
+  name String
+  tag String
+  leagueId String @database.ObjectId
+  league League @relation(fields: [leagueId], references: [id])
+  players Player[]
+
+  @@map("teams")
+}
+
+enum Role {
+  TOP
+  JUNGLE
+  MID
+  ADC
+  SUPPORT
+}
+
+model Player {
+  id String @id @default(auto()) @map("_id") @database.ObjectId
+  summonerName String
+  firstName String
+  lastName String
+  role Role
+  teamId String? @database.ObjectId
+  team Team? @relation(fields: [teamId], references: [id])
+
+  @@map("players")
+}

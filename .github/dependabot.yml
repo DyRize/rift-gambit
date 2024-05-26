@@ -68,5 +68,9 @@ updates:
       tools:
         patterns:
           - 'knip'
+      prisma:
+        patterns:
+          - 'prisma'
+          - '@prisma/client'
     target-branch: 'dev'
     open-pull-requests-limit: 20

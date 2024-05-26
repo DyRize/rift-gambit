@@ -38,6 +38,7 @@ const config: Config = {
     '!src/storage/**/*',
     '!src/components/**/*',
     '!src/themes/**/*',
+    '!src/database.ts',
   ],
 
   // The directory where Jest should output its coverage files

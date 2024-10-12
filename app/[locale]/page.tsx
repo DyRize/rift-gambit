@@ -16,16 +16,18 @@ import {
 } from '@components/ui/table';
 import { Pencil1Icon, TrashIcon } from '@radix-ui/react-icons';
 
-const mockLEC: Omit<League, 'id'> = {
+const mockLEC: Omit<League, 'id' | 'createdAt' | 'updatedAt'> = {
   name: 'League of Legends EMEA Championship',
   tag: 'LEC',
   region: $Enums.Region.EUROPE,
+  currentPhase: $Enums.SplitPhase.REGULAR_SEASON,
 };
 
-const mockLFL: Omit<League, 'id'> = {
+const mockLFL: Omit<League, 'id' | 'createdAt' | 'updatedAt'> = {
   name: 'Ligue Française de League of Legends',
   tag: 'LFL',
   region: $Enums.Region.EUROPE,
+  currentPhase: $Enums.SplitPhase.REGULAR_SEASON,
 };
 
 const Home = () => {

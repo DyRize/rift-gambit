@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
 import { database } from '@/src/database';
-import { $Enums, League } from '@prisma/client';
+import { League } from '@prisma/client';
 
 export async function POST(request: Request) {
   try {
-    const { name, tag, region }: Partial<League> = (await request.json()) as League;
+    const { name, tag, region, currentPhase }: Partial<League> =
+      (await request.json()) as League;
 
     if (typeof name !== 'string' || name.trim() === '') {
       return NextResponse.json(
@@ -27,11 +28,19 @@ export async function POST(request: Request) {
       );
     }
 
+    if (typeof currentPhase !== 'string' || currentPhase.trim() === '') {
+      return NextResponse.json(
+        { error: 'Current phase is required and must be a non-empty string' },
+        { status: 400 },
+      );
+    }
+
     const league = await database.league.create({
       data: {
         name: name.trim(),
         tag: tag.trim(),
         region: region,
+        currentPhase: currentPhase,
       },
     });
 

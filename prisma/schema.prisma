@@ -3,9 +3,20 @@ generator client {
 }
 
 datasource database {
-  provider = "mongodb"
-  url = env("DATABASE_URL")
+  provider     = "mongodb"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
+}
+
+enum MatchFormat {
+  BO1
+  BO3
+  BO5
+}
+
+enum SplitPhase {
+  REGULAR_SEASON
+  PLAYOFFS
 }
 
 enum Region {
@@ -15,28 +26,7 @@ enum Region {
   CHINA
 }
 
-model League {
-  id String @id @default(auto()) @map("_id") @database.ObjectId
-  name String
-  tag String
-  region Region
-  teams Team[]
-
-  @@map("leagues")
-}
-
-model Team {
-  id String @id @default(auto()) @map("_id") @database.ObjectId
-  name String
-  tag String
-  leagueId String @database.ObjectId
-  league League @relation(fields: [leagueId], references: [id])
-  players Player[]
-
-  @@map("teams")
-}
-
-enum Role {
+enum PlayerRole {
   TOP
   JUNGLE
   MID
@@ -44,14 +34,141 @@ enum Role {
   SUPPORT
 }
 
+enum UserRole {
+  ADMIN
+  USER
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @database.ObjectId
+  username  String   @unique
+  email     String   @unique
+  password  String
+  role      UserRole @default(USER)
+  bets      Bet[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
 model Player {
-  id String @id @default(auto()) @map("_id") @database.ObjectId
+  id           String     @id @default(auto()) @map("_id") @database.ObjectId
   summonerName String
-  firstName String
-  lastName String
-  role Role
-  teamId String? @database.ObjectId
+  firstName    String
+  lastName     String
+  role         PlayerRole
+  teamId       String?    @database.ObjectId
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
   team Team? @relation(fields: [teamId], references: [id])
 
   @@map("players")
+}
+
+model Team {
+  id              String   @id @default(auto()) @map("_id") @database.ObjectId
+  name            String
+  tag             String
+  leagueId        String   @database.ObjectId
+  players         Player[]
+  blueSideMatches Match[]  @relation("BlueSideTeam")
+  redSideMatches  Match[]  @relation("RedSideTeam")
+  winnedMatches   Match[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  league League @relation(fields: [leagueId], references: [id])
+
+  @@map("teams")
+}
+
+model League {
+  id           String     @id @default(auto()) @map("_id") @database.ObjectId
+  name         String
+  tag          String
+  region       Region
+  currentPhase SplitPhase
+  teams        Team[]
+  splits       Split[]
+  matches      Match[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@map("leagues")
+}
+
+model Split {
+  id        String     @id @default(auto()) @map("_id") @database.ObjectId
+  name      String
+  leagueId  String     @database.ObjectId
+  year      Int
+  phase     SplitPhase
+  days      Day[]
+  matches   Match[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  league League @relation(fields: [leagueId], references: [id])
+
+  @@map("splits")
+}
+
+model Day {
+  id        String   @id @default(auto()) @map("_id") @database.ObjectId
+  number    Int
+  splitId   String   @database.ObjectId
+  matches   Match[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  split Split @relation(fields: [splitId], references: [id])
+
+  @@map("days")
+}
+
+model Match {
+  id             String      @id @default(auto()) @map("_id") @database.ObjectId
+  leagueId       String      @database.ObjectId
+  splitId        String      @database.ObjectId
+  blueSideTeamId String      @database.ObjectId
+  redSideTeamId  String      @database.ObjectId
+  format         MatchFormat
+  date           DateTime
+  matchOfTheWeek Boolean     @default(false)
+  isFinished     Boolean     @default(false)
+  blueSideScore  Int?
+  redSideScore   Int?
+  winnerTeamId   String?     @database.ObjectId
+  bets           Bet[]
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  dayId          String      @database.ObjectId
+
+  day          Day?   @relation(fields: [dayId], references: [id])
+  league       League @relation(fields: [leagueId], references: [id])
+  split        Split  @relation(fields: [splitId], references: [id])
+  blueSideTeam Team   @relation("BlueSideTeam", fields: [blueSideTeamId], references: [id])
+  redSideTeam  Team   @relation("RedSideTeam", fields: [redSideTeamId], references: [id])
+  winnerTeam   Team?  @relation(fields: [winnerTeamId], references: [id])
+
+  @@map("matches")
+}
+
+model Bet {
+  id                     String   @id @default(auto()) @map("_id") @database.ObjectId
+  userId                 String   @database.ObjectId
+  matchId                String   @database.ObjectId
+  predictedWinnerId      String   @database.ObjectId
+  predictedBlueSideScore Int
+  predictedRedSideScore  Int
+  points                 Int?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  user  User  @relation(fields: [userId], references: [id])
+  match Match @relation(fields: [matchId], references: [id])
+
+  @@map("bets")
 }

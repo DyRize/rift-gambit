@@ -33,7 +33,7 @@
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "i18next": "^23.16.0",
+    "i18next": "^23.16.2",
     "jotai": "^2.10.1",
     "next": "14.2.15",
     "next-auth": "^4.24.8",

@@ -2,10 +2,10 @@
 
 import { Switch } from '@components/ui/switch';
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 
 // Todo : Enhance this component with design and story in the future
-const DarkModeToggle = () => {
+const DarkModeToggle = ({ children }: PropsWithChildren) => {
   const { theme, setTheme } = useTheme();
   const [currentTheme, setCurrentTheme] = useState<string | null>(null);
 
@@ -20,10 +20,8 @@ const DarkModeToggle = () => {
 
   return (
     <div className="flex gap-2">
-      <label htmlFor="toggle" className="flex cursor-pointer items-center">
-        Dark Mode
-      </label>
       <Switch id={'toggle'} checked={currentTheme === 'dark'} onClick={toggleDarkMode} />
+      {children ?? 'Dark mode'}
     </div>
   );
 };

@@ -1,5 +1,21 @@
 {
   "example": {
-    "Changement de la langue par défaut": "Change default language"
+    "Changement de la langue par défaut": "Change default language",
+    "Langues disponibles": "Available languages"
+  },
+  "sidebar-user-dropdown": {
+    "Passer à la version pro": "Upgrade to pro version",
+    "Mode sombre": "Dark mode",
+    "Mon compte": "My account",
+    "Paramètres": "Settings",
+    "Notifications": "Notifications",
+    "Déconnexion": "Logout"
+  },
+  "sidebar-navigation-leagues": {
+    "Calendrier des matchs": "Match schedule",
+    "Classement": "Ranking",
+    "Équipes": "Teams",
+    "Statistiques": "Statistics",
+    "Tableau des scores": "Scoreboard"
   }
 }

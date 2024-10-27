@@ -1,5 +1,21 @@
 {
   "example": {
-    "Changement de la langue par défaut": "Changement de la langue par défaut"
+    "Changement de la langue par défaut": "Changement de la langue par défaut",
+    "Langues disponibles": "Langues disponibles"
+  },
+  "sidebar-user-dropdown": {
+    "Passer à la version pro": "Passer à la version pro",
+    "Mode sombre": "Mode sombre",
+    "Mon compte": "Mon compte",
+    "Paramètres": "Paramètres",
+    "Notifications": "Notifications",
+    "Déconnexion": "Déconnexion"
+  },
+  "sidebar-navigation-leagues": {
+    "Calendrier des matchs": "Calendrier des matchs",
+    "Classement": "Classement",
+    "Équipes": "Équipes",
+    "Statistiques": "Statistiques",
+    "Tableau des scores": "Tableau des scores"
   }
 }
